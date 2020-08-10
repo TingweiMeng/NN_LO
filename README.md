@@ -1,1 +1,1 @@
-# NN_LO
+This is the code for the preprint "On some neural network architectures that can represent viscosity solutions of certain high dimensional Hamilton--Jacobi partial differential equations" (https://arxiv.org/abs/2002.09750).
