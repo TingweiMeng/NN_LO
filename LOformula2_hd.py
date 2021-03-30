@@ -6,13 +6,13 @@ x_data = 1000
 n_data = x_data * x_data
 dim = 5
 
-# 0 for 1 dim, 1 for hd, 2 for 1-norm, 3 for inf-norm
+# 1 for e.g.3.4, 2 for H=1-norm in e.g.3.5, 3 for H=inf-norm in e.g.3.5
 eg_no = 1
 
 def min_fn(x):
     return tf.math.reduce_min(x, axis=-1)
 
-# J = -x^2/2.
+# J = -|x|^2/2.
 def J_fn(x):
     val = -tf.reduce_sum(tf.multiply(x,x), axis = -1)/2
     return val
@@ -36,8 +36,6 @@ elif eg_no == 2:
             v_true = vi
         else:
             v_true = np.concatenate([v_true, vi], axis = 0)
-#        print(v_true.shape)
-#        print(v_true)
     b_true = np.zeros((2**dim,))
 elif eg_no == 3:
     # H = inf-norm
@@ -49,8 +47,6 @@ elif eg_no == 3:
             v_true = vi
         else:
             v_true = np.concatenate([v_true, vi], axis = 0)
-#        print(v_true.shape)
-#        print(v_true)
     b_true = np.zeros((2*dim,))
 
 v_param = tf.Variable(v_true, name = "v0", dtype = tf.float64)
@@ -88,8 +84,6 @@ a = plt.contourf(X, Y, y_mat, 10)
 plt.colorbar(a)
 plt.xlabel('x1')
 plt.ylabel('x2')
-# plt.plot(x_grid0, y_val)
-#plt.title('formula 2')
 plt.savefig('formula2_t0')
 
 sess.close()
